@@ -5,7 +5,8 @@ import { Mark } from "./mark.model";
 
 @modelOptions({
   schemaOptions: {
-    timestamps: true
+    timestamps: true,
+    toJSON: { virtuals: true }
   }
 })
 
@@ -27,10 +28,10 @@ export class Article {
   body: string
 
   @ApiProperty({ description: '文章标签' })
-  @prop({ itemsRef: 'Mark' })
+  @prop({ ref: 'Mark' })
   marks: Ref<Mark>[]
 
   @ApiProperty({ description: '所属文章分类' })
-  @prop({ itemsRef: 'Category' })
+  @prop({ ref: 'Category' })
   category: Ref<Category>
 }

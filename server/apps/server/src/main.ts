@@ -7,9 +7,10 @@ async function bootstrap() {
   app.enableCors()
 
   const options = new DocumentBuilder()
-    .setTitle('waliwali - 后台管理API')
-    .setDescription('供后台管理界面调用的服务端API')
+    .setTitle('waliwali - 前端API')
+    .setDescription('供网站和小程序的服务端API')
     .setVersion('1.0')
+    .addBearerAuth()
     .build();
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('api-docs', app, document);
