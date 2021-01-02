@@ -21,9 +21,9 @@
             </div>
           </div>
           <div class="card-footer">
-            <div>点赞</div>
-            <div>收藏</div>
-            <div>评论</div>
+            <!-- <div>点赞</div>
+            <div>评论</div> -->
+            <like-btn :object="item._id" type="Article"></like-btn>
           </div>
         </div>
       </div>
@@ -32,7 +32,10 @@
 </template>
 
 <script>
+import LikeBtn from '../../components/LikeBtn.vue'
+
 export default {
+  components: { LikeBtn },
   async asyncData({ $axios }) {
     const data = await $axios.$get('articles')
     return {

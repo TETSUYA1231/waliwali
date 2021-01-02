@@ -6,8 +6,10 @@ import { Article } from './models/article.model';
 import { Category } from './models/category.model';
 import { Mark } from './models/mark.model';
 import { User } from './models/user.model';
+import { Action } from './models/action.model';
+import { Comment } from './models/comment.model';
 
-const models = TypegooseModule.forFeature([Adminuser, Article, Category, Mark, User])
+const models = TypegooseModule.forFeature([Adminuser, Article, Category, Mark, User, Action, Comment])
 
 @Global()
 @Module({
