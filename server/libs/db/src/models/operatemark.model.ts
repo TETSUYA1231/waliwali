@@ -3,8 +3,8 @@ import { prop, Ref } from '@typegoose/typegoose';
 import { Article } from './article.model';
 import { Category } from './category.model';
 
-export class Mark {
-  @ApiProperty({ description: '用户侧文章标签' })
+export class Operatemark {
+  @ApiProperty({ description: '运营侧文章标签' })
   @prop()
   name: string;
 

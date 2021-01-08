@@ -9,6 +9,8 @@ import { ArticlesModule } from './articles/articles.module';
 import { CategoriesModule } from './categories/categories.module';
 import { MarksController } from './marks/marks.controller';
 import { MarksModule } from './marks/marks.module';
+import { OperatemarksModule } from './operatemarks/operatemarks.module';
+import { OparticlesModule } from './oparticles/oparticles.module';
 
 const MAO = require('multer-aliyun-oss');
 
@@ -32,7 +34,9 @@ const MAO = require('multer-aliyun-oss');
     AdminusersModule,
     ArticlesModule,
     CategoriesModule,
-    MarksModule
+    MarksModule,
+    OperatemarksModule,
+    OparticlesModule
   ],
   controllers: [AdminController, MarksController],
   providers: [AdminService],

@@ -7,22 +7,26 @@ import { InjectModel } from 'nestjs-typegoose';
 
 @Crud({
   model: Article,
-  routes: {
-    create: false,
-    update: false,
-    delete: false
-  }
+  // routes: {
+  //   create: false,
+  //   update: false,
+  //   delete: false
+  // }
 })
 @Controller('articles')
 @ApiTags('文章')
 export class ArticlesController {
   constructor(
-    @InjectModel(Article) private readonly model: ReturnModelType<typeof Article>
-  ) { }
+    @InjectModel(Article)
+    private readonly model: ReturnModelType<typeof Article>,
+  ) {}
 
   @Get()
   async articles() {
-    return await this.model.find({}).populate('marks').populate('category').exec()
+    return await this.model
+      .find({})
+      .populate('marks')
+      .populate('category')
+      .exec();
   }
 }
-

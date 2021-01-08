@@ -1,5 +1,5 @@
 import { Mark } from '@libs/db/models/mark.model';
-import { Controller, Get } from '@nestjs/common';
+import { Controller } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { ReturnModelType } from '@typegoose/typegoose';
 import { Crud } from 'nestjs-mongoose-crud';
@@ -7,19 +7,17 @@ import { InjectModel } from 'nestjs-typegoose';
 
 @Crud({
   model: Mark,
+  // routes: {
+  //   create: false,
+  //   update: false,
+  //   delete: false
+  // }
 })
 @Controller('marks')
-@ApiTags('标签')
+@ApiTags('分类标签')
 export class MarksController {
   constructor(
-    @InjectModel(Mark) private readonly model: ReturnModelType<typeof Mark>,
+    @InjectModel(Mark)
+    private readonly model: ReturnModelType<typeof Mark>,
   ) {}
-
-  @Get('option')
-  option() {
-    return {
-      title: '标签管理',
-      column: [{ prop: 'name', label: '标签名称' }],
-    };
-  }
 }

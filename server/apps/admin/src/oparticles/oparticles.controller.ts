@@ -1,6 +1,7 @@
 import { Article } from '@libs/db/models/article.model';
 import { Category } from '@libs/db/models/category.model';
-import { Mark } from '@libs/db/models/mark.model';
+import { Oparticle } from '@libs/db/models/oparticle.model';
+import { Operatemark } from '@libs/db/models/operatemark.model';
 import { Controller, Get } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { ReturnModelType } from '@typegoose/typegoose';
@@ -8,28 +9,29 @@ import { Crud } from 'nestjs-mongoose-crud';
 import { InjectModel } from 'nestjs-typegoose';
 
 @Crud({
-  model: Article,
+  model: Oparticle,
 })
-@Controller('articles')
-@ApiTags('文章')
-export class ArticlesController {
+@Controller('oparticles')
+@ApiTags('运营文章')
+export class OparticlesController {
   constructor(
-    @InjectModel(Article)
+    @InjectModel(Oparticle)
     private readonly model: ReturnModelType<typeof Article>,
     @InjectModel(Category)
     private readonly CategoryModel: ReturnModelType<typeof Category>,
-    @InjectModel(Mark) private readonly MarkModel: ReturnModelType<typeof Mark>,
+    @InjectModel(Operatemark)
+    private readonly OperatemarkModel: ReturnModelType<typeof Operatemark>,
   ) {}
 
   @Get('option')
   async option() {
     const categories = (
-      await this.CategoryModel.find({ name: { $nin: ['开发', '运营'] } })
+      await this.CategoryModel.find({ name: { $in: ['开发', '运营'] } })
     ).map((v) => ({
       label: v.name,
       value: v._id,
     }));
-    const marks = (await this.MarkModel.find()).map((i) => ({
+    const operatemarks = (await this.OperatemarkModel.find()).map((i) => ({
       label: i.name,
       value: i._id,
     }));
@@ -53,21 +55,43 @@ export class ArticlesController {
           span: 12,
         },
         {
-          prop: 'marks',
+          prop: 'operatemark',
           label: '文章标签',
           type: 'select',
-          dicData: marks,
-          multiple: false,
+          dicData: operatemarks,
+          multiple: true,
           span: 12,
         },
         {
           prop: 'cover',
           label: '文章封面图',
+          dataType: 'array',
           type: 'upload',
           width: 160,
-          listType: 'picture-img',
+          listType: 'picture-card',
+          propsHttp: {
+            res: 'data',
+            url: 'url',
+          },
           span: 24,
           action: 'upload',
+        },
+        {
+          label: '编辑内容',
+          span: 24,
+          text: '',
+          prop: 'body',
+          component: 'ueditor',
+          options: {
+            action: 'upload',
+            customConfig: {
+              uploadImgServer: '',
+            }, //wangEditor编辑的配置
+            // props: {
+            //   res: 'data',
+            //   url: 'url',
+            // },
+          },
         },
       ],
     };

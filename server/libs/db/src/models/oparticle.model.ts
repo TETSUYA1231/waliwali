@@ -1,8 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { modelOptions, prop, Ref } from '@typegoose/typegoose';
+import { Adminuser } from './adminuser.model';
 import { Category } from './category.model';
-import { Mark } from './mark.model';
-import { User } from './user.model';
+import { Operatemark } from './operatemark.model';
 
 @modelOptions({
   schemaOptions: {
@@ -10,14 +10,14 @@ import { User } from './user.model';
     toJSON: { virtuals: true },
   },
 })
-export class Article {
+export class Oparticle {
   @ApiProperty({ description: '文章标题' })
   @prop()
   title: string;
 
   @ApiProperty({ description: '文章作者' })
-  @prop({ ref: 'User' })
-  author: Ref<User>;
+  @prop({ ref: 'Adminuser' })
+  author: Ref<Adminuser>;
 
   @ApiProperty({ description: '文章封面图集' })
   @prop()
@@ -27,11 +27,11 @@ export class Article {
   @prop()
   body: string;
 
-  @ApiProperty({ description: '所属用户侧文章标签' })
-  @prop({ ref: 'Mark' })
-  marks: Ref<Mark>[];
-
   @ApiProperty({ description: '所属文章分类' })
   @prop({ ref: 'Category' })
   category: Ref<Category>;
+
+  @ApiProperty({ description: '所属运营侧文章标签' })
+  @prop({ ref: 'Operatemark' })
+  operatemark: Ref<Operatemark>[];
 }
