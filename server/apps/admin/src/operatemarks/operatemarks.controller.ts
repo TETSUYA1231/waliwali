@@ -1,10 +1,13 @@
 import { Operatemark } from '@libs/db/models/operatemark.model';
-import { Controller, Get } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import { Controller, Get, UseGuards } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { ReturnModelType } from '@typegoose/typegoose';
 import { Crud } from 'nestjs-mongoose-crud';
 import { InjectModel } from 'nestjs-typegoose';
 
+@UseGuards(AuthGuard('jwt'))
+@ApiBearerAuth()
 @Crud({
   model: Operatemark,
 })

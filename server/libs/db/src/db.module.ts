@@ -11,6 +11,7 @@ import { Comment } from './models/comment.model';
 import { Business } from './models/business.model';
 import { Operatemark } from './models/operatemark.model';
 import { Oparticle } from './models/oparticle.model';
+import { Servercate } from './models/servercate.model';
 
 const models = TypegooseModule.forFeature([
   Adminuser,
@@ -23,6 +24,7 @@ const models = TypegooseModule.forFeature([
   Business,
   Operatemark,
   Oparticle,
+  Servercate,
 ]);
 
 @Global()

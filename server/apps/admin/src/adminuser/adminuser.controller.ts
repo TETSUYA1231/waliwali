@@ -1,5 +1,5 @@
-import { Mark } from '@libs/db/models/mark.model';
-import { Controller, Get, UseGuards } from '@nestjs/common';
+import { Adminuser } from '@libs/db/models/adminuser.model';
+import { Controller, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { ReturnModelType } from '@typegoose/typegoose';
@@ -9,12 +9,13 @@ import { InjectModel } from 'nestjs-typegoose';
 @UseGuards(AuthGuard('jwt'))
 @ApiBearerAuth()
 @Crud({
-  model: Mark,
+  model: Adminuser,
 })
-@Controller('marks')
-@ApiTags('标签')
-export class MarksController {
+@Controller('adminuser')
+@ApiTags('管理员列表')
+export class AdminuserController {
   constructor(
-    @InjectModel(Mark) private readonly model: ReturnModelType<typeof Mark>,
+    @InjectModel(Adminuser)
+    private readonly model: ReturnModelType<typeof Adminuser>,
   ) {}
 }

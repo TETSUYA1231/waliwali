@@ -11,12 +11,13 @@ async function bootstrap() {
     .setTitle('waliwali - 后台管理API')
     .setDescription('供后台管理界面调用的服务端API')
     .setVersion('1.0')
+    .addBearerAuth()
     .build();
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('api-docs', app, document);
 
-  const PORT = process.env.ADMIN_PORT || 3002
-  await app.listen(PORT)
-  console.log(`http://localhost:${PORT}/api-docs`)
+  const PORT = process.env.ADMIN_PORT || 3002;
+  await app.listen(PORT);
+  console.log(`http://localhost:${PORT}/api-docs`);
 }
 bootstrap();
